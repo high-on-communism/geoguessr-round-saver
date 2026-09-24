@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   let activeKey = '', loaded = null, loading = false, loadError = '', fallback;
+  let panelClosed = false;
   const saved = new Map();
   const send = msg => chrome.runtime.sendMessage(msg);
   function buttonFor(number) {
@@ -25,7 +26,7 @@
         saved.set(number, label);
         document.querySelectorAll(`[data-grs-round="${number}"]`).forEach(b => { b.textContent = label; b.disabled = false; });
         status(`Round ${number}: ${result.duplicate ? 'already in' : 'saved to'} ${result.name} · ${result.count} locations`);
-      } catch (e) { if (key === activeKey) {button.textContent = 'Retry save'; status(e.message, true);} }
+      } catch (e) { if (key === activeKey) {button.textContent = 'Retry save'; button.title = e.message; status(e.message, true);} }
       finally { button.disabled = false; }
     });
     return button;
@@ -37,6 +38,20 @@
   function toolbar() {
     if (document.getElementById('grs-panel')) return;
     const panel = document.createElement('section'); panel.id = 'grs-panel';
+    panel.hidden = panelClosed;
+    const reopen = document.createElement('button'); reopen.id = 'grs-reopen'; reopen.type = 'button';
+    reopen.textContent = 'Round Saver'; reopen.hidden = !panelClosed;
+    reopen.setAttribute('aria-label', 'Open Round Saver panel');
+    reopen.setAttribute('aria-controls', 'grs-panel');
+    const close = document.createElement('button'); close.id = 'grs-close'; close.type = 'button';
+    close.textContent = '×'; close.title = 'Close Round Saver panel';
+    close.setAttribute('aria-label', 'Close Round Saver panel');
+    close.onclick = () => {
+      panelClosed = true; panel.hidden = true; reopen.hidden = false; reopen.focus();
+    };
+    reopen.onclick = () => {
+      panelClosed = false; panel.hidden = false; reopen.hidden = true; close.focus();
+    };
     const title = document.createElement('strong'); title.textContent = 'Round Saver';
     const settings = document.createElement('button'); settings.textContent = 'Map file'; settings.type = 'button';
     settings.onclick = () => send({type: 'OPEN_SETTINGS'}).catch(e => status(e.message, true));
@@ -44,8 +59,8 @@
     retry.onclick = () => { loaded = null; loadError = ''; tick(); };
     const line = document.createElement('div'); line.id = 'grs-status'; line.setAttribute('role', 'status'); line.setAttribute('aria-live', 'polite');
     line.textContent = 'Loading round locations…';
-    panel.append(title, settings, retry, line);
-    document.body.append(panel);
+    panel.append(title, close, settings, retry, line);
+    document.body.append(panel, reopen);
   }
   function mount() {
     if (!loaded) return;
@@ -73,8 +88,8 @@
     const route = RoundSaver.summaryRoute(location.href);
     const key = route ? route.type + '/' + route.id : '';
     if (key !== activeKey) {
-      activeKey = key; loaded = null; loading = false; loadError = ''; saved.clear();
-      document.querySelectorAll('.grs-save, #grs-panel').forEach(el => el.remove());
+      activeKey = key; loaded = null; loading = false; loadError = ''; panelClosed = false; saved.clear();
+      document.querySelectorAll('.grs-save, #grs-panel, #grs-reopen').forEach(el => el.remove());
       document.querySelectorAll('.grs-round').forEach(el => el.classList.remove('grs-round'));
     }
     if (!key) return;

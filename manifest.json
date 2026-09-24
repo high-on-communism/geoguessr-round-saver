@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "GeoGuessr Round Saver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Save completed GeoGuessr rounds directly to a chosen map-making.app JSON file.",
   "minimum_chrome_version": "120",
   "permissions": [],
