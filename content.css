@@ -1,0 +1,11 @@
+#grs-panel { position:fixed; bottom:18px; right:18px; z-index:2147483646; box-sizing:border-box; width:330px; max-width:calc(100vw - 36px); max-height:65vh; overflow:auto; padding:14px; color:#f5f5ff; background:#19182c; border:1px solid #76728f; border-radius:12px; box-shadow:0 6px 30px #0006; font:13px/1.5 system-ui,sans-serif; }
+#grs-panel strong { display:block; margin-bottom:8px; font-size:15px; }
+#grs-panel button, .grs-save { font:600 12px/1.4 system-ui,sans-serif; color:#13221c; background:#9de4bf; border:0; border-radius:6px; padding:7px 10px; cursor:pointer; }
+#grs-panel button { margin:0 6px 6px 0; }
+#grs-status { margin-top:4px; overflow-wrap:anywhere; }
+#grs-status.grs-error { color:#ffb8af; }
+.grs-round { flex-wrap:wrap !important; }
+.grs-round > .grs-save { position:relative; z-index:2; display:block; margin:5px 0 6px 8px; flex-shrink:0; }
+.grs-save:disabled { opacity:.55; cursor:wait; }
+.grs-save:focus-visible, #grs-panel button:focus-visible { outline:3px solid #fff; outline-offset:2px; }
+.grs-fallback-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:8px; }

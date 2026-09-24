@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Round Saver — map file</title><link rel="stylesheet" href="settings.css"></head>
+<body><main><p class="eyebrow">GEOGUESSR ROUND SAVER</p><h1>Your rounds. Your map.</h1>
+<p>Select the local map JSON you want to build. Each round you save is added directly to that file, ready to import into map-making.app.</p>
+<section><h2>Destination file</h2><p id="file">Loading…</p><div class="actions"><button id="choose">Choose existing file</button><button id="create">Create new map</button><button id="reconnect" hidden>Reconnect</button></div><p class="hint">Files without a .json extension work too. Chrome will ask for permission to edit your chosen file.</p></section>
+<p id="status" role="status" aria-live="polite"></p>
+<section><h2>How to save</h2><ol><li>Choose a file above and allow editing.</li><li>Open a completed GeoGuessr game summary.</li><li>Click <b>+ Save to JSON</b> beside a round.</li><li>Import the updated file into map-making.app when ready.</li></ol><p class="hint">The setup tab can be closed. If Chrome expires permission, return here and click Reconnect, then retry the round.</p></section>
+<section><h2>Recovery copy</h2><p>The previous file contents are retained locally before each write. Download that copy if you need to undo the most recent addition.</p><button id="backup">Download last backup</button><p class="hint">Avoid editing this same file in another program while saving rounds. Duplicate panorama IDs are skipped. Existing tags and metadata are kept.</p></section>
+<footer>Runs locally. No third-party servers, native helper, or access to other files. Supports Duels summary pages and classic results pages; classic rounds appear in the Round Saver panel.</footer>
+</main><script src="core.js"></script><script src="db.js"></script><script src="settings.js"></script></body></html>

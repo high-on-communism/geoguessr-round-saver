@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "GeoGuessr Round Saver",
+  "version": "1.0.0",
+  "description": "Save completed GeoGuessr rounds directly to a chosen map-making.app JSON file.",
+  "minimum_chrome_version": "120",
+  "permissions": [],
+  "host_permissions": ["https://www.geoguessr.com/*", "https://game-server.geoguessr.com/*"],
+  "background": {"service_worker": "background.js"},
+  "action": {"default_title": "Choose your map JSON"},
+  "options_page": "settings.html",
+  "content_scripts": [{
+    "matches": ["https://www.geoguessr.com/*"],
+    "js": ["core.js", "content.js"],
+    "css": ["content.css"],
+    "run_at": "document_idle"
+  }]
+}
