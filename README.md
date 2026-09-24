@@ -35,7 +35,7 @@ Chrome may expire file permission after restarting or a period of inactivity. Cl
 
 ## Supported pages and limitations
 
-- Duels: `/duels/GAME_ID/summary` and `/team-duels/GAME_ID/summary`. Built against the nine-round Duels HTML supplied on September 24, 2026.
+- Duels: `/duels/GAME_ID/summary` and `/team-duels/GAME_ID/summary`.
 - Classic: `/results/GAME_ID`, with buttons in a floating labeled round list.
 - Live games, Battle Royale, challenge leaderboards, and replay-only pages are not supported.
 - If GeoGuessr changes its layout, the labeled round list serves as a fallback. If its private API changes, the extension may need an update.
