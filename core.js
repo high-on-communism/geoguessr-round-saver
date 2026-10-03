@@ -58,8 +58,10 @@
   }
   function sameLocation(a, b) {
     const pa = decodePano(a.panoId), pb = decodePano(b.panoId);
-    if (pa && pb) return pa === pb;
-    return Math.abs(a.lat - b.lat) < 0.000001 && Math.abs(a.lng - b.lng) < 0.000001;
+    const sameCoordinates = a.lat === b.lat && a.lng === b.lng;
+    // An ID alone is not enough: reused or placeholder IDs can refer to
+    // different locations. Keep distinct panoramas at matching coordinates.
+    return sameCoordinates && (!(pa && pb) || pa === pb);
   }
   async function appendLocation(handle, location, backup) {
     const clean = locationOf(location);

@@ -26,7 +26,7 @@ Chrome may expire file permission after restarting or a period of inactivity. Cl
 - Keeps the selected file handle in extension-local IndexedDB. Only your selected file can be edited.
 - Preserves existing locations, tags, map name, and other fields. JSON whitespace is reformatted on write.
 - Supports `{ "name": "My map", "customCoordinates": [...] }` and bare location arrays.
-- Decodes GeoGuessr's hex-encoded panorama IDs. Repeated panorama IDs are skipped. If an ID is missing, duplicates are checked by coordinates within 0.000001 degrees. Distinct panoramas at the same coordinates are retained.
+- Decodes GeoGuessr's hex-encoded panorama IDs. A duplicate must have exactly equal numeric latitude and longitude and, when both IDs are present, the same panorama ID. No coordinate rounding or tolerance is applied. Matching IDs at different coordinates and distinct panoramas at the same coordinates are retained.
 - New locations have empty tags. Existing tags are never changed.
 - Rereads the file before every update and serializes writes across tabs. Avoid editing the same file in another program during a save; simultaneous external writes cannot be fully locked out.
 - Before each addition, stores the exact previous file contents locally. **Download last backup** exports that recovery copy. Only the most recent backup is retained; removing the extension removes it.
