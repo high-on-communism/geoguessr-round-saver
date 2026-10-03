@@ -9,7 +9,7 @@ A Chrome extension that adds **+ Save to JSON** to completed Duels round cards. 
 3. Turn on **Developer mode** at the top right.
 4. Click **Load unpacked** and select the `geoguessr-round-saver` folder containing `manifest.json`.
 5. Click the extension in Chrome's Extensions menu to open its setup page.
-6. Click **Choose existing file**, select your map export, and allow editing. Files with no extension, such as `CostaRica-CR-17.05.26`, work. Alternatively, click **Create new map**.
+6. Click **Choose existing file**, select your map export, and allow editing. Files with no extension work. Alternatively, click **Create new map**.
 7. Reload any already-open GeoGuessr summary page.
 
 ## Use
@@ -35,7 +35,7 @@ Chrome may expire file permission after restarting or a period of inactivity. Cl
 
 ## Supported pages and limitations
 
-- Duels: `/duels/GAME_ID/summary` and `/team-duels/GAME_ID/summary`. Built against the nine-round Duels HTML supplied on September 24, 2026.
+- Duels: `/duels/GAME_ID/summary` and `/team-duels/GAME_ID/summary`.
 - Classic: `/results/GAME_ID`, with buttons in a floating labeled round list.
 - Live games, Battle Royale, challenge leaderboards, and replay-only pages are not supported.
 - If GeoGuessr changes its layout, the labeled round list serves as a fallback. If its private API changes, the extension may need an update.
