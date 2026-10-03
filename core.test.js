@@ -52,7 +52,8 @@ test('saving a reused panorama ID appends the absent location and skips a repeat
   assert.equal(doc.customCoordinates[1].lat, 11);
   assert.equal(backups[0].text, original);
   assert.deepEqual(await appendLocation(handle, location, backup),
-    {duplicate: true, count: 2, name: 'map.json'});
+    {duplicate: true, count: 2, name: 'map.json',
+      duplicateMatch: {entry: 2, lat: 11, lng: 21, panoId: 'reused-id'}});
   assert.equal(writes, 1);
   assert.equal(backups.length, 1);
 });

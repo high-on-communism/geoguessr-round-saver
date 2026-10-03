@@ -25,7 +25,9 @@
         const label = result.duplicate ? '✓ Already in JSON' : '✓ Saved';
         saved.set(number, label);
         document.querySelectorAll(`[data-grs-round="${number}"]`).forEach(b => { b.textContent = label; b.disabled = false; });
-        status(`Round ${number}: ${result.duplicate ? 'already in' : 'saved to'} ${result.name} · ${result.count} locations`);
+        const match = result.duplicateMatch;
+        const details = match ? ` · entry ${match.entry} · ${match.lat}, ${match.lng} · panorama ${match.panoId || 'no ID'}` : '';
+        status(`Round ${number}: ${result.duplicate ? 'already in' : 'saved to'} ${result.name} · ${result.count} locations${details}`);
       } catch (e) { if (key === activeKey) {button.textContent = 'Retry save'; button.title = e.message; status(e.message, true);} }
       finally { button.disabled = false; }
     });

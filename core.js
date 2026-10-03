@@ -70,7 +70,11 @@
     }
     const original = await (await handle.getFile()).text();
     const {doc, coordinates} = parseMap(original);
-    if (coordinates.some(p => sameLocation(p, clean))) return {duplicate: true, count: coordinates.length, name: handle.name};
+    const matchIndex = coordinates.findIndex(p => sameLocation(p, clean));
+    if (matchIndex !== -1) return {
+      duplicate: true, count: coordinates.length, name: handle.name,
+      duplicateMatch: {entry: matchIndex + 1, lat: clean.lat, lng: clean.lng, panoId: clean.panoId}
+    };
     coordinates.push(clean);
     await backup({text: original, name: handle.name, savedAt: new Date().toISOString()});
     // Detect edits made while preparing the update. Browser commits on close.
