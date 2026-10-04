@@ -3,7 +3,7 @@
   let activeKey = '', loaded = null, loading = false, loadError = '', fallback;
   let panelClosed = false;
   const saved = new Map();
-  const send = msg => chrome.runtime.sendMessage(msg);
+  const send = msg => chrome.runtime.sendMessage({...msg, pageUrl: location.href});
   function buttonFor(number) {
     const button = document.createElement('button');
     button.type = 'button';

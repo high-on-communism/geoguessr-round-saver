@@ -26,7 +26,12 @@ async function roundsFor(route) {
   return rounds;
 }
 chrome.runtime.onMessage.addListener((msg, sender, reply) => {
-  const route = sender.tab && RoundSaver.summaryRoute(sender.url || sender.tab.url);
+  // sender.url can retain the document's original URL after SPA navigation.
+  // The content script sends the URL visible when the user made the request.
+  let route;
+  try {
+    route = sender.tab && RoundSaver.summaryRoute(msg.pageUrl || sender.tab.url || sender.url);
+  } catch { return; }
   if (sender.id !== chrome.runtime.id || !route) return;
   (async () => {
     if (msg.type === 'OPEN_SETTINGS') { await openSettings(); return {}; }
